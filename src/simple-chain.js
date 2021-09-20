@@ -5,24 +5,39 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default {
+  nodes : [],
   getLength() {
-    throw new NotImplementedError('Not implemented');
+    return this.nodes.length;
+    // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
+  addLink(value) {
+    this.nodes.push(value);
+    return this;
+    // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
+  removeLink(position) {
+    if (typeof position !== 'number' || position < 1 || position > this.nodes.length || position % 1) {
+      this.nodes = [];
+      throw new Error("You can't remove incorrect link!");
+    }
+    this.nodes.splice(position - 1, 1);
+    return this;
+    // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
+    this.nodes = this.nodes.reverse();
+      return this;
+    // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
+    const res = this.nodes.map(el => `( ${el} )`).join('~~');
+      this.nodes = [];
+      return res;
+    // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   }
 };
